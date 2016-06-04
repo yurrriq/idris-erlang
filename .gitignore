@@ -21,3 +21,4 @@ src/Version_idris.hs
 .*.el
 *.S
 *.core
+.stack-work/
