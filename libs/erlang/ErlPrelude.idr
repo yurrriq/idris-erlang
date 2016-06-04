@@ -1,6 +1,6 @@
 module ErlPrelude
 
-%access public
+%access public export
 
 data ErlFn : Type -> Type where
   MkErlFun : (x : t) -> ErlFn t
@@ -10,7 +10,7 @@ data ErlRaw : Type -> Type where
   MkERaw : (x:t) -> ErlRaw t
 %used MkERaw x
 
-abstract data Atom : Type
+public export data Atom : Type
 
 data Erl_NumTypes: Type -> Type where
   Erl_IntChar    : Erl_NumTypes Char
@@ -54,8 +54,7 @@ ErlPid = Ptr
 -- Annoyingly, the File struct is abstract so we can't use it. I guess
 -- this helps prevent people mixing the two kinds of files... not that
 -- it would even be possible.
-abstract
-data EFile = EHandle Ptr
+public export data EFile = EHandle Ptr
 
 namespace Erl
   stdin : EFile

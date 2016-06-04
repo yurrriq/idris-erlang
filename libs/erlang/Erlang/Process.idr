@@ -20,7 +20,7 @@ run (MkProc p) = p
 map : {a,b:Type*} -> (a -> b) -> Process l a -> Process l b
 map f (MkProc p) = MkProc (map f p)
 
-instance Functor (Process l) where
+Functor (Process l) where
  map = Process.map
 
 pure : {a:Type*} -> a -> Process l a
@@ -32,14 +32,14 @@ return = Process.pure
 (<*>) : {a,b:Type*} -> Process l (a -> b) -> Process l a -> Process l b
 (MkProc f) <*> (MkProc a) = MkProc (f <*> a)
 
-instance Applicative (Process l) where
+Applicative (Process l) where
  pure = Process.pure
  (<*>) = Process.(<*>)
 
 (>>=) : {a,b:Type*} -> Process l a -> (a -> Process l b) -> Process l b
 (MkProc a) >>= p = MkProc (a >>= (\as => case p as of (MkProc b) => b))
 
-instance Monad (Process l) where
+Monad (Process l) where
   (>>=) = Process.(>>=)
 
 self : Process l (ProcRef l)
