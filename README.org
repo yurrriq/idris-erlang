@@ -1,0 +1,47 @@
+#+STARTUP: showall
+#+OPTIONS: toc:nil
+
+* idris-erlang
+/Idris to Erlang Compiler and Libraries/
+
+** Prerequisites
+- [[http://www.erlang.org/downloads][Erlang]]
+- [[http://docs.haskellstack.org/en/stable/install_and_upgrade/][Stack]]
+
+** Build
+*** idris-erlang
+#+BEGIN_SRC fish
+stack build
+#+END_SRC
+or
+#+BEGIN_SRC fish
+make
+#+END_SRC
+
+*** Erlang Package
+#+BEGIN_SRC fish
+cd libs/erlang
+stack exec idris -- --instal erlang.ipkg
+#+END_SRC
+or
+#+BEGIN_SRC fish
+make -C libs/erlang
+#+END_SRC
+
+*** Runtime Support
+#+BEGIN_SRC fish
+erlc -o irts irts/*.erl
+#+END_SRC
+
+** Usage
+To invoke the compiler:
+#+BEGIN_SRC fish
+stack exec idris -- --codegen=erlang --package erlang Main.idr -o main.erl
+#+END_SRC
+
+Then run the program:
+#+BEGIN_SRC fish
+escript main.erl
+#+END_SRC
+
+If all goes well, you should be able to compile and run the examples.
