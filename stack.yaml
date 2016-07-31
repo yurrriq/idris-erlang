@@ -3,9 +3,9 @@ packages:
 - '.'
 - location:
     git: git@github.com:yurrriq/CoreErlang
-    commit: 18a02b19ae74f7e29aa31b88d8276c308dcbd234
+    commit: 5d6a3b147942e2ade6ea5c104774ac75f95dfde6
+  extra-dep: true
 
 extra-deps:
 - idris-0.12
 - megaparsec-5.0.1
-# - CoreErlang-0.0.3
