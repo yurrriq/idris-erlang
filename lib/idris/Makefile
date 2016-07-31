@@ -1,5 +1,5 @@
 IDRIS := stack exec idris --
-PKG   := erlang
+PKG   := cerl
 
 .PHONY: build clean clean-all install rebuild doc doc-clean
 

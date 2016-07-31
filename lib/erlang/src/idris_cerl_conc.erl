@@ -1,4 +1,4 @@
--module(idris_erlang_conc).
+-module(idris_cerl_conc).
 
 -export([receive_any/0,receive_any_from/1,receive_any_msg/1]).
 -export([receive_from/1,send/2]).

@@ -1,4 +1,4 @@
--module(idris_erlang_rts).
+-module(idris_cerl_rts).
 
 -define(TRUE,  1).
 -define(FALSE, 0).

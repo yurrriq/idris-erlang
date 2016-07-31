@@ -1,28 +1,27 @@
 module Main where
 
-import           Idris.AbsSyntax
-import           Idris.Core.TT
-import           Idris.ElabDecls
-import           Idris.REPL
+import           Idris.AbsSyntax        (Codegen (Via), IRFormat (IBCFormat),
+                                         Idris, runIO)
+-- import           Idris.Core.TT
+import           Idris.ElabDecls        (elabMain, elabPrims)
+import           Idris.REPL             (loadInputs, runMain)
 
-import           IRTS.CodegenErlang
-import           IRTS.Compiler
+import           IRTS.CodegenCoreErlang (codegenCoreErlang)
+import           IRTS.Compiler          (compile)
 
-import           Control.Monad      (liftM)
+import           Control.Monad          (liftM)
 
-import           Data.Bool          (bool)
+import           System.Environment     (getArgs)
+import           System.Exit            (ExitCode (ExitSuccess), exitWith)
 
-import           System.Environment
-import           System.Exit
+import           Paths_idris_cerl       (getDataFileName)
 
-
-import           Paths_idris_erlang
-
-data Opts = Opts { inputs    :: [FilePath]
-                 , output    :: FilePath
-                 , show_path :: Bool
-                 , interface :: Bool
-                 }
+data Opts = Opts
+  { inputs    :: [FilePath]
+  , output    :: FilePath
+  , show_path :: Bool
+  , interface :: Bool
+  }
 
 erlDefaultOpts :: Opts
 erlDefaultOpts = Opts
@@ -32,8 +31,9 @@ erlDefaultOpts = Opts
   , interface = False
   }
 
+showUsage :: IO ()
 showUsage = do
-  putStrLn "Usage: idris-erlang [--interface] [--path] <ibc-files> [-o <output-file>]"
+  putStrLn "Usage: idris-cerl [--interface] [--path] <ibc-files> [-o <output-file>]"
   exitWith ExitSuccess
 
 getOpts :: IO Opts
@@ -50,12 +50,10 @@ getOpts = do
 erl_main :: Opts -> Idris ()
 erl_main opts = do
   elabPrims
-  loadInputs (inputs opts) Nothing
-  mainProg <- if   interface opts
-             then return Nothing
-             else liftM Just elabMain
-  ir <- compile (Via IBCFormat "erlang") (output opts) mainProg
-  runIO $ codegenErlang ir
+  _        <- loadInputs (inputs opts) Nothing
+  mainProg <- if interface opts then return Nothing else liftM Just elabMain
+  ir       <- compile (Via IBCFormat "cerl") (output opts) mainProg
+  runIO $ codegenCoreErlang ir
 
 main :: IO ()
 main = do

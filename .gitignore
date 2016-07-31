@@ -22,3 +22,4 @@ src/Version_idris.hs
 *.S
 *.core
 .stack-work/
+_build/

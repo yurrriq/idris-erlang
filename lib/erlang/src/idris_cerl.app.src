@@ -1,0 +1,12 @@
+{application, idris_cerl, [
+  {description, "Core Erlang Backend for the Idris Compiler"},
+  {vsn, "0.1.0"},
+  {applications, [kernel, stdlib]},
+  {modules, []},
+
+  {maintainers, ["Eric Bailey"]},
+  {licenses,    ["BSD-3"]},
+  {links, [
+    {"GitHub", "https://github.com/yurrriq/idris-erlang"}
+  ]}
+ ]}.
