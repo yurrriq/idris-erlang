@@ -7,5 +7,5 @@ packages:
   extra-dep: true
 
 extra-deps:
-- idris-0.12
+- idris-0.12.1
 - megaparsec-5.0.1

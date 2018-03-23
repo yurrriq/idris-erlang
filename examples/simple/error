@@ -1,0 +1,5 @@
+Error: generateExp case GLOB {e0} of {
+	Prelude.Bool.False() => CON Prelude.Bool.False()
+	| Prelude.Bool.True() => {EVAL0}(GLOB {e1})
+Type checking ./Main.idr
+FAILURE: "idris-codegen-cerl" ["./Main.ibc","-o","main.erl"]

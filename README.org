@@ -9,34 +9,29 @@
 - [[http://docs.haskellstack.org/en/stable/install_and_upgrade/][Stack]]
 
 ** Build
-*** idris-erlang
+*** idris-cerl
 #+BEGIN_SRC fish
 stack build
 #+END_SRC
 or
 #+BEGIN_SRC fish
-make
+make haskell
 #+END_SRC
 
-*** Erlang Package
+*** Core Erlang Package
 #+BEGIN_SRC fish
-cd libs/erlang
-stack exec idris -- --instal erlang.ipkg
-#+END_SRC
-or
-#+BEGIN_SRC fish
-make -C libs/erlang
+make idris
 #+END_SRC
 
 *** Runtime Support
 #+BEGIN_SRC fish
-erlc -o irts irts/*.erl
+make erlang
 #+END_SRC
 
 ** Usage
 To invoke the compiler:
 #+BEGIN_SRC fish
-stack exec idris -- --codegen=erlang --package erlang Main.idr -o main.erl
+stack exec idris -- --codegen=cerl -p cerl Main.idr -o main.erl
 #+END_SRC
 
 Then run the program:
